@@ -4,4 +4,7 @@ var runLoop = function() {
 }
 
 var app = new App(document.getElementById('canvas'));
+
+document.addEventListener('mousemove', app.mousemove);
+
 setInterval(runLoop, 30);
