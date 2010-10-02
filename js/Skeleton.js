@@ -1,9 +1,6 @@
 var Skeleton = function(rootJoint) {
-	var skeleton = this;
 	
-	skeleton.rootJoint = rootJoint;
-	
-	skeleton.update = function(joint, parent) {
+	this.update = function(joint, parent) {
 		if(!joint) {
 			joint = skeleton.rootJoint;
 		} else {
@@ -21,9 +18,9 @@ var Skeleton = function(rootJoint) {
 		for(i in  joint.joints) {
 			skeleton.update(joint.joints[i], joint);
 		}
-	}
+	};
 	
-	skeleton.debug = function(context, joint, parent) {
+	this.debug = function(context, joint, parent) {
 		if(!joint) {
 			joint = skeleton.rootJoint;
 		}
@@ -42,4 +39,8 @@ var Skeleton = function(rootJoint) {
 			skeleton.debug(context, joint.joints[i], joint);
 		}
 	};
-}
+	
+	this.setup = function() {
+		
+	};
+};
