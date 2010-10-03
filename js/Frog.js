@@ -9,11 +9,14 @@ var Frog = function(x,y) {
 	
 	frog.update = function(mouse) {
 		frog.angle = Math.atan2(mouse.y - frog.y,mouse.x - frog.x);
-		
+		frog.skeleton.rig.x = frog.x;
+		frog.skeleton.rig.y = frog.y;
+		frog.skeleton.rig.angle = frog.angle;
+		frog.skeleton.update();
 	};
 	
 	frog.draw = function(context) {
-		//frog.skeleton.debug(context);
+		frog.skeleton.debug(context);
 	};
 	
 	(function() {
