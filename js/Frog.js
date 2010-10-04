@@ -16,7 +16,7 @@ var Frog = function(x,y) {
 	};
 	
 	frog.draw = function(context) {
-		frog.skeleton.debug(context);
+		frog.skeleton.draw(context);
 	};
 	
 	(function() {

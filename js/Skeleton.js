@@ -21,6 +21,42 @@ var Skeleton = function(rootJoint) {
 		}
 	};
 	
+	this.draw = function(context, joint, parent) {
+		if(!joint) {
+			joint = this.rig;
+		}
+		
+		
+		
+		if(parent) {
+			var angle = Math.atan2(joint.y - parent.y, joint.x - parent.x);
+			var length = joint.options.distance/2;
+			context.strokeStyle = 'red';
+			context.beginPath();
+			context.moveTo(joint.x,joint.y);
+			context.lineTo(joint.x + Math.cos(angle + Math.PI)*length,joint.y +  Math.sin(angle + Math.PI)*length);
+			context.closePath();
+			context.stroke();
+			
+			context.strokeStyle = 'green';
+			context.beginPath();
+			context.moveTo(parent.x,parent.y);
+			context.lineTo(parent.x + Math.cos(angle)*length,parent.y +  Math.sin(angle)*length);
+			context.closePath();
+			context.stroke();
+			
+			// context.beginPath();
+			// context.moveTo(parent.x, parent.y);
+			// context.lineTo(joint.x, joint.y);
+			// context.closePath();
+			// context.stroke();
+		}
+		
+		for(i in  joint.joints) {
+			this.draw(context, joint.joints[i], joint);
+		}
+	}
+	
 	this.debug = function(context, joint, parent) {
 		if(!joint) {
 			joint = this.rig;
