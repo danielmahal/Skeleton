@@ -18,6 +18,14 @@ var App = function(aCanvas) {
 		mouse.y = e.clientY;
 	};
 	
+	this.mousedown = function() {
+		frog.momentum = 4;
+	};
+	
+	this.mouseup = function() {
+		frog.momentum = 0;
+	};
+	
 	(function() {
 		frog = new Frog(200,100);
 		context = canvas.getContext('2d');

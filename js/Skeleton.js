@@ -8,11 +8,30 @@ var Skeleton = function(rootJoint) {
 				joint.options.angle = 0;
 			}
 			
-			var targetAngle = parent.angle + joint.options.angle;
-			joint.angle += (targetAngle - joint.angle) / (joint.options.angleDelay || 1);
+			var targetAngle2 = parent.angle + joint.options.angle;
+			var targetAngle = Math.atan2(joint.y - parent.y, joint.x - parent.x);
+			var angleDiff = targetAngle - joint.angle;
 			
-			joint.x = parent.x + Math.cos(joint.angle) * joint.options.distance;
-			joint.y = parent.y + Math.sin(joint.angle) * joint.options.distance;
+			while(angleDiff < -Math.PI) {
+				angleDiff += Math.PI * 2;
+			}
+			while(angleDiff > Math.PI) {
+				angleDiff -= Math.PI * 2;
+			}
+			
+			if(joint.angle > parent.angle + joint.options.maxAngle) {
+				joint.angle = parent.angle + joint.options.maxAngle;
+			}
+			
+			if(joint.angle < parent.angle + joint.options.minAngle) {
+				joint.angle = parent.angle + joint.options.minAngle;
+			}
+			
+			joint.angle += angleDiff;
+			joint.angle += (joint.options.stiffness || 0) * (targetAngle2 - joint.angle);
+			
+			joint.x = parent.x + Math.cos(joint.angle) * joint.options.distance*2.5;
+			joint.y = parent.y + Math.sin(joint.angle) * joint.options.distance*2.5;
 			
 		}
 		
@@ -33,23 +52,15 @@ var Skeleton = function(rootJoint) {
 			var length = joint.options.distance/2;
 			context.strokeStyle = 'red';
 			context.beginPath();
-			context.moveTo(joint.x,joint.y);
-			context.lineTo(joint.x + Math.cos(angle + Math.PI)*length,joint.y +  Math.sin(angle + Math.PI)*length);
+			context.arc(joint.x, joint.y, (joint.options.size || 1), angle + Math.PI*1.5, angle + Math.PI*.5);
+			context.arc(parent.x, parent.y, (parent.options.size || 1), angle + Math.PI*.5, angle + Math.PI*1.5);
 			context.closePath();
-			context.stroke();
-			
-			context.strokeStyle = 'green';
-			context.beginPath();
-			context.moveTo(parent.x,parent.y);
-			context.lineTo(parent.x + Math.cos(angle)*length,parent.y +  Math.sin(angle)*length);
-			context.closePath();
-			context.stroke();
+			context.fill();
 			
 			// context.beginPath();
-			// context.moveTo(parent.x, parent.y);
-			// context.lineTo(joint.x, joint.y);
-			// context.closePath();
-			// context.stroke();
+			// 			context.arc(parent.x, parent.y, (parent.options.size || 1), 0, Math.PI*2);
+			// 			context.closePath();
+			// 			context.stroke();
 		}
 		
 		for(i in  joint.joints) {
@@ -61,13 +72,33 @@ var Skeleton = function(rootJoint) {
 		if(!joint) {
 			joint = this.rig;
 		}
-		
+		context.strokeStyle = 'black';
 		context.strokeRect(joint.x-2,joint.y-2,4,4);
 		
 		if(parent) {
 			context.beginPath();
 			context.moveTo(parent.x, parent.y);
 			context.lineTo(joint.x, joint.y);
+			context.closePath();
+			context.stroke();
+		}
+		
+		if(joint.options.minAngle) {
+			var angle = parent.angle + joint.options.minAngle;
+			context.strokeStyle = 'red';
+			context.beginPath();
+			context.moveTo(parent.x, parent.y);
+			context.lineTo(parent.x + Math.cos(angle)*10, parent.y + Math.sin(angle)*10);
+			context.closePath();
+			context.stroke();
+		}
+		
+		if(joint.options.maxAngle) {
+			var angle = parent.angle + joint.options.maxAngle;
+			context.strokeStyle = 'red';
+			context.beginPath();
+			context.moveTo(parent.x, parent.y);
+			context.lineTo(parent.x + Math.cos(angle)*10, parent.y + Math.sin(angle)*10);
 			context.closePath();
 			context.stroke();
 		}
