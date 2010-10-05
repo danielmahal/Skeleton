@@ -9,6 +9,8 @@ var Frog = function(x,y) {
 	frog.skeleton = null;
 	
 	frog.update = function(mouse) {
+		frog.momentum *= .95;
+		
 		var targetAngle = Math.atan2(mouse.y - frog.y,mouse.x - frog.x);
 		var angleDiff = targetAngle - frog.angle;
 		
@@ -31,7 +33,6 @@ var Frog = function(x,y) {
 	};
 	
 	frog.draw = function(context) {
-		//frog.skeleton.debug(context);
 		frog.skeleton.draw(context);
 	};
 	

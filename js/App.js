@@ -19,11 +19,11 @@ var App = function(aCanvas) {
 	};
 	
 	this.mousedown = function() {
-		frog.momentum = 4;
+		frog.momentum = 15;
 	};
 	
 	this.mouseup = function() {
-		frog.momentum = 0;
+		
 	};
 	
 	(function() {
