@@ -10,7 +10,7 @@ FrogSkeleton = function() {
 					hand: 	{ options: { distance: 4, angle: 0, stiffness: 1, size:4 }}
 				}
 			},
-
+	
 			leftArm: { options: {distance: 10, angle: -1.5,stiffness: .2, size: 4, minAngle: -2.7, maxAngle: -1.5 },
 				underArm: { options: {distance: 4, angle: 1.8, stiffness: .1, size: 2, maxAngle: 1.8, minAngle: 0  },
 					hand: 	{ options: { distance: 4, angle: 0, stiffness: 1, size:4 }}
@@ -23,7 +23,7 @@ FrogSkeleton = function() {
 				foot: { options: { distance: 10, angle: 3.6, stiffness: .05, minAngle: 3.6, maxAngle: 5.5, size: 2 }}
 			}
 		},
-
+	
 		leftLeg: { options: { distance: 12, angle: -1.8, stiffness: .2, minAngle: -3, maxAngle: -1.8, size: 5 },
 			thigh: { options: { distance: 10, angle: -2.2, stiffness: .1, maxAngle: 0, minAngle: -2.5, size: 4 },
 				foot: { options: { distance: 10, angle: 2.5, stiffness: .05, minAngle: 1, maxAngle: 2.5, size: 2 }}

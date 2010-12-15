@@ -72,7 +72,7 @@ var Skeleton = function(rootJoint) {
 		if(!joint) {
 			joint = this.rig;
 		}
-		context.strokeStyle = 'black';
+		context.strokeStyle = 'red';
 		context.strokeRect(joint.x-2,joint.y-2,4,4);
 		
 		if(parent) {
