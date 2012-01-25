@@ -32,23 +32,23 @@ FrogSkeleton = function() {
 	};
 	
 	// Tail
-	// var parent = frogSkeleton.rig;
-	// var nTail = 10;
-	// for(var i = 0; i < nTail; i++) {
-	// 	var angle = i == 0 ? Math.PI : 0;
-	// 	
-	// 	var maxAngle = i == 0 ? 4 : .8;
-	// 	var minAngle = i == 0 ? 2 : -0.8;
-	// 	
-	// 	parent = parent['tail'+i] = {options:{
-	// 		angle: angle,
-	// 		maxAngle: maxAngle,
-	// 		minAngle: minAngle,
-	// 		distance: 3,
-	// 		stiffness: 0.2,
-	// 		size: 5 - i*0.5
-	// 	}};
-	// }
+	var parent = frogSkeleton.rig;
+	var nTail = 10;
+	for(var i = 0; i < nTail; i++) {
+		var angle = i == 0 ? Math.PI : 0;
+		
+		var maxAngle = i == 0 ? 4 : .8;
+		var minAngle = i == 0 ? 2 : -0.8;
+		
+		parent = parent['tail'+i] = {options:{
+			angle: angle,
+			maxAngle: maxAngle,
+			minAngle: minAngle,
+			distance: 3,
+			stiffness: 0.2,
+			size: 5 - i*0.5
+		}};
+	}
 	
 	this.setup();
 };

@@ -34,6 +34,7 @@ var Frog = function(x,y) {
 	
 	frog.draw = function(context) {
 		frog.skeleton.draw(context);
+		frog.skeleton.debug(context);
 	};
 	
 	(function() {
